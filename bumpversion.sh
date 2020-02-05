@@ -71,7 +71,7 @@ if [ -f VERSION ]; then
     # We want the LIVE image to be based on FULL IRIS, not IRIS Community. But we want the same version of IRIS.
     rm ./image-iris/Dockerfile.live
     cp ./image-iris/Dockerfile ./image-iris/Dockerfile.live
-    sed -E -i '' "s;FROM store/intersystems/iris-community:([0-9][0-9.]*);FROM amirsamary/irisdemo:iris.:\1;g" ./image-iris/Dockerfile.live
+    sed -E -i '' "s;FROM store/intersystems/iris-community:([0-9][0-9.]*);FROM amirsamary/irisdemo:iris.\1;g" ./image-iris/Dockerfile.live
 
     echo "## $INPUT_STRING ($NOW)" > tmpfile
     git log --pretty=format:"  - %s" "v$BASE_STRING"...HEAD >> tmpfile

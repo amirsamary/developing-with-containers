@@ -20,5 +20,5 @@ export IRIS_PRIVATE_REPO=amirsamary/irisdemo
 
 # You can change the image of your APP. But it must end with -version-n.n.n
 # We will replace this every time you bump the version on this git repo (see bumpversion.sh)
-export APP_DOCKER_IMAGE=amirsamary/developing-with-containers:irisdb-version-1.5.0
+export APP_DOCKER_IMAGE=amirsamary/developing-with-containers:irisdb-version-1.6.0
 
