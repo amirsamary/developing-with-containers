@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   irisdb: 
-    image: amirsamary/developing-with-containers:irisdb-version-1.6.0
+    image: amirsamary/developing-with-containers:irisdb-version-1.7.0
     hostname: irisdb
     init: true
     container_name: irisdb
