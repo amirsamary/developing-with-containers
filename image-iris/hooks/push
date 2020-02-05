@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+docker push ${DOCKER_REPO}:irisdb-${DOCKER_TAG}

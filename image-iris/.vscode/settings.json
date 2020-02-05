@@ -1,0 +1,14 @@
+
+{
+    "objectscript.conn":
+    {
+        "active": true,
+        "label": "irisdb",
+        "host": "localhost",
+        "port": 52773,
+        "username": "SuperUser",
+        "password": "sys",
+        "ns": "MYAPP",
+        "https": false
+    }
+}
