@@ -9,9 +9,9 @@ Parameter CHARSET = "utf-8";
 
 XData UrlMap
 {
-<Routes>
+<Routes> 
     <Map Prefix="/predict" Forward="ML.Model.BS.ExecutorService.Service"/>
-  </Routes>
+</Routes>
 }
 
 }

@@ -1,0 +1,4 @@
+[config]
+globals=0,0,1024,0,0,0
+routines=512
+

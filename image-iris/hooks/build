@@ -12,4 +12,4 @@ echo "   DOCKERFILE_PATH: $DOCKERFILE_PATH"
 echo "   DOCKER_TAG     : $DOCKER_TAG"
 echo "   IMAGE_NAME     : $IMAGE_NAME"
 
-docker build -t ${DOCKER_REPO}:irisdb-${DOCKER_TAG} ./
+docker build -t ${DOCKER_REPO}:irisdb-${DOCKER_TAG} --file Dockerfile.live ./ 
