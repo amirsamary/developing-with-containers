@@ -19,8 +19,10 @@
 | Method:   | URL |
 | --------- | --- |
 | POST       | http://localhost:52773/csp/myapp/rest/reservations |
-| --------- | --- |
-| Body      | ```json
+
+
+Body:
+```json
 {
     "customer": "Amir",
     "startLocation": "Brazil",
