@@ -1,50 +1,52 @@
 Class IRISConfig.InstallerBase [ Abstract ]
-{ 
-	/// This method must always be here
-	ClassMethod setup(ByRef pVars, pLogLevel As %Integer = 0, pInstaller As %Installer.Installer) As %Status [ CodeMode = objectgenerator, Internal ]
-	{
+{
+
+/// This method must always be here
+ClassMethod setup(ByRef pVars, pLogLevel As %Integer = 0, pInstaller As %Installer.Installer) As %Status [ CodeMode = objectgenerator, Internal ]
+{
 	     Quit ##class(%Installer.Manifest).%Generate(%compiledclass, %code, "Install")
-	}
+}
 
-	ClassMethod AuthForSMP() As %Integer
-	{
+ClassMethod AuthForSMP() As %Integer
+{
 		Quit $$$AutheNormal
-	}
+}
 
-	ClassMethod AuthAllowed()
-	{
+ClassMethod AuthAllowed()
+{
+ 
 		Quit $$$AutheUnauthenticated+$$$AutheCache+$$$AutheDelegated
-	}
-	
-	ClassMethod AuthForCSP()
-	{
+}
+
+ClassMethod AuthForCSP()
+{
 		Quit $$$AutheCache+$$$AutheDelegated
-	}
-	
-	ClassMethod AuthForInt()
-	{
+}
+
+ClassMethod AuthForInt()
+{
 		Quit $$$AutheUnauthenticated
-	}
-	
-	ClassMethod AuthForREST()
-	{
+}
+
+ClassMethod AuthForREST()
+{
 		Quit $$$AutheLoginToken+$$$AutheCache
-	}
-	
-	ClassMethod AuthForSOAP()
-	{
+}
+
+ClassMethod AuthForSOAP()
+{
 		Quit $$$AutheLoginToken+$$$AutheCache
 		
 		// You can override this method on your subclass and use unauthenticated if you are using another method to protect your SOAP
 		// service such as a Config class to define orthogonal security
 		//Quit $$$AutheUnauthenticated
-	}
-	
-	/// This method is called by a RUN instruction inside your Dockerfile. It will
-	/// use environment variables defined on your Dockerfile to further parameterize
-	/// this setup.
-	ClassMethod Install()
-	{
+}
+
+/// This method is called by a RUN instruction inside your Dockerfile. It will
+/// use environment variables defined on your Dockerfile to further parameterize
+/// this setup.
+ClassMethod Install()
+{
 		Set tSC = $$$OK
 		Try
 		{
@@ -81,11 +83,11 @@ Class IRISConfig.InstallerBase [ Abstract ]
 		Else 
 		{ 
 			Do $zu(4,$j,0) // exit status 0
-		} 
-	}
+		}
+}
 
-	ClassMethod ConfigureAutoStart(pNamespace As %String, pClassName As %String) As %Status
-	{
+ClassMethod ConfigureAutoStart(pNamespace As %String, pClassName As %String) As %Status
+{
 		Set tSC = $$$OK
 		Try
 		{
@@ -102,17 +104,17 @@ Class IRISConfig.InstallerBase [ Abstract ]
 		
 		ZN "%SYS"
 		
-		Quit tSC 
-	}
-	
-	ClassMethod CSPAppConfigureAsREST(pCSPAppName) As %Status
-	{
+		Quit tSC
+}
+
+ClassMethod CSPAppConfigureAsREST(pCSPAppName, pDispatcherClassName As %String) As %Status
+{
 		Set tSC = $System.Status.OK()
 		Try
 		{
 			Set oCSPApp = ##class(Security.Applications).%OpenId(pCSPAppName, , .tSC)
 	
-			Set oCSPApp.DispatchClass="IRISDemo.REST.Dispatcher"
+			Set oCSPApp.DispatchClass=pDispatcherClassName
 			Set oCSPApp.UseCookies=1
 			Set tSC = oCSPApp.%Save()
 			Quit:$System.Status.IsError(tSC)
@@ -123,10 +125,10 @@ Class IRISConfig.InstallerBase [ Abstract ]
 		}
 	
 		Quit tSC
-	}
+}
 
-	ClassMethod DisableJournalSystemWide() As %Status
-	{
+ClassMethod DisableJournalSystemWide() As %Status
+{
 		Set tSC = $System.Status.OK()
 		
 		Try
@@ -151,15 +153,15 @@ Class IRISConfig.InstallerBase [ Abstract ]
 		Set $Namespace=tNS
 		
 		Quit tSC
-	}
-	
-	ClassMethod AddRoleToUser(pUserName As %String, pRole As %String) As %Status
-	{
+}
+
+ClassMethod AddRoleToUser(pUserName As %String, pRole As %String) As %Status
+{
 		Quit ##class(Security.Users).AddRoles(pUserName, pRole)
-	}
-	
-	ClassMethod CSPAppEnableAnalytics(pCSPAppName) As %Status
-	{
+}
+
+ClassMethod CSPAppEnableAnalytics(pCSPAppName) As %Status
+{
 		Set tSC = $System.Status.OK()
 		Try
 		{
@@ -182,10 +184,10 @@ Class IRISConfig.InstallerBase [ Abstract ]
 		}
 	
 		Quit tSC
-	}
-	
-	ClassMethod AddWFRole(pNamespace As %String, pRoleName As %String) As %Status
-	{
+}
+
+ClassMethod AddWFRole(pNamespace As %String, pRoleName As %String) As %Status
+{
 		Set tSC = $System.Status.OK()
 		Try
 		{
@@ -202,10 +204,10 @@ Class IRISConfig.InstallerBase [ Abstract ]
 		ZN tNS
 		
 		Quit tSC
-	}
-	
-	ClassMethod AddWFUser(pNamespace As %String, pUserName As %String, pFullName As %String, pRoleName As %String) As %Status
-	{
+}
+
+ClassMethod AddWFUser(pNamespace As %String, pUserName As %String, pFullName As %String, pRoleName As %String) As %Status
+{
 		Set tSC = $System.Status.OK()
 		Try
 		{
@@ -225,10 +227,10 @@ Class IRISConfig.InstallerBase [ Abstract ]
 		ZN tNS
 		
 		Quit tSC
-	}
-	
-	ClassMethod AddUserToWFRole(pNamespace As %String, pUserName As %String, pRoleName As %String) As %Status
-	{
+}
+
+ClassMethod AddUserToWFRole(pNamespace As %String, pUserName As %String, pRoleName As %String) As %Status
+{
 		Set tSC = $System.Status.OK()
 		Try
 		{
@@ -245,10 +247,10 @@ Class IRISConfig.InstallerBase [ Abstract ]
 		ZN tNS
 		
 		Quit tSC
-	}
-	
-	ClassMethod FixPMML() As %Status
-	{
+}
+
+ClassMethod FixPMML() As %Status
+{
 		Set tSC = $System.Status.OK()
 		Try
 		{
@@ -280,12 +282,13 @@ Class IRISConfig.InstallerBase [ Abstract ]
 		ZN tNS
 		
 		Quit tSC
-	}
-	
-	XData Install [ XMLNamespace = INSTALLER ]
-	{
-	<Manifest>
+}
+
+XData Install [ XMLNamespace = INSTALLER ]
+{
+<Manifest>
 
 	</Manifest>
-	}
+}
+
 }

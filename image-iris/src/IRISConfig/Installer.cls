@@ -33,7 +33,7 @@ XData Install [ XMLNamespace = INSTALLER ]
 		
 		<CSPApplication Url="/csp/${CSPAppName}/soap" Directory="${CSPDIR}${CSPAppName}" Recurse="true" AuthenticationMethods="#{##class(IRISConfig.Installer).AuthForSOAP()}" IsNamespaceDefault="false" CookiePath="/csp/${CSPAppName}/soap" AutoCompile="false" Grant="AppRole" CSPZENEnabled="true" InboundWebServicesEnabled="true"  GroupById="${CSPAppName}" UseSessionCookie="1"/>
 		
-		<CSPApplication Url="/csp/${CSPAppName}/rest" Directory="${CSPDIR}${CSPAppName}" Recurse="true" AuthenticationMethods="#{##class(IRISConfig.Installer).AuthForREST()}" IsNamespaceDefault="false" CookiePath="/csp/${CSPAppName}/rest" AutoCompile="false" Grant="AppRole" CSPZENEnabled="true" InboundWebServicesEnabled="false" GroupById="${CSPAppName}" DispatchClass="IRISDemo.REST.Dispatcher" UseSessionCookie="1"/>
+		<CSPApplication Url="/csp/${CSPAppName}/rest" Directory="${CSPDIR}${CSPAppName}" Recurse="true" AuthenticationMethods="#{##class(IRISConfig.Installer).AuthForREST()}" IsNamespaceDefault="false" CookiePath="/csp/${CSPAppName}/rest" AutoCompile="false" Grant="AppRole" CSPZENEnabled="true" InboundWebServicesEnabled="false" GroupById="${CSPAppName}" DispatchClass="TravelAgency.REST.Dispatcher" UseSessionCookie="1"/>
 		
 		<IfDef Var="SourceDir">
             <Log Text="SourceDir defined - offline install from ${SourceDir}" Level="0"/>
@@ -45,6 +45,7 @@ XData Install [ XMLNamespace = INSTALLER ]
 	<Log Text="Applying additional configurations to the new REST CSP Application..." Level="0"/>
 	<Invoke Class="IRISConfig.Installer" Method="CSPAppConfigureAsREST" CheckStatus="true">
 		<Arg name="pCSPAppName" Value="/csp/${CSPAppName}/rest"/>
+		<Arg name="pDispatcherClassName" Value="TravelAgency.REST.Dispatcher"/>
 	</Invoke>
 
 	<Log Text="Enabling Analytics on main CSP application so we can import PMML and see production statistics." Level="0"/>
@@ -60,4 +61,5 @@ XData Install [ XMLNamespace = INSTALLER ]
 	
 </Manifest>
 }
+
 }

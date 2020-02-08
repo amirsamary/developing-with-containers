@@ -1,4 +1,4 @@
-FROM store/intersystems/iris-community:2020.1.0.197.0
+FROM store/intersystems/iris-community:2019.3.0.309.0
 LABEL maintainer="Amir Samary <amir.samary@intersystems.com>"
 
 # If you want to have an IRIS Interoperability Production configured to be started automatically

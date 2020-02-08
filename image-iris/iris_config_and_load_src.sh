@@ -7,6 +7,8 @@
 
 source $ISC_PACKAGE_INSTALLDIR/imageBuildingUtils.sh
 
+export IRIS_APP_SOURCEDIR=/tmp/iris_project
+
 # This will bring the databases we are writing to to the "writable" layer (copy on write)
 # to prevent some errors when we are trying to load our source code
 prepare_databases_for_writing;
