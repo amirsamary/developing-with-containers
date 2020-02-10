@@ -1,4 +1,16 @@
-# Creating REST Services with InterSystems IRIS
+# Best Practices with InterSystems IRIS REST Services and Container Examples
+
+This repository holds the source code used on two of my presentations:
+- [REST API design - REST at Ease](https://raw.githubusercontent.com/amirsamary/developing-with-containers/master/presentations/REST_API_design_with_IRIS.pdf)
+- [The Value Of Developing With Containers](https://raw.githubusercontent.com/amirsamary/developing-with-containers/master/presentations/Value_Of_Containers_with_IRIS.pdf)
+
+The first presentation was inspired on a presentation of a similar name, given by Michael Smart. Although this repository containes everything you need, Michael's original source code can be found [here](https://github.com/intersystems/rest-and-relaxation). Thank you Michael!
+
+The second presentation was inspired on a presentation of the same name, given by Joe Carrol. Thank you Joe! I have updated just a little bit and added some new stuff.
+
+# REST API design - REST at Ease
+
+Follow the instructions bellow to start the IRIS container with the source code. 
 
 ## How to run this demo
 
@@ -45,13 +57,13 @@ Before trying to call them:
 
 | Method    | URL |
 | --------- | :--- |
-| GET       | http://localhost:52773/csp/myapp/rest/reservations |
+| GET       | http://localhost:52773/csp/myapp/rest/reservations/v3 |
 
 ### Creating a reservation
 
 | Method    | URL |
 | --------- | :--- |
-| POST       | http://localhost:52773/csp/myapp/rest/reservations |
+| POST       | http://localhost:52773/csp/myapp/rest/reservations/v3 |
 
 
 *Body:*
@@ -68,13 +80,13 @@ Before trying to call them:
 
 The new resource name is returned at the *Location* header:
 
-**Location:** /csp/myapp/rest/reservations/7
+**Location:** /csp/myapp/rest/reservations/v3/7
 
 ### Partial Update of a Reservation
 
 | Method    | URL |
 | --------- | :--- |
-| PATH       | http://localhost:52773/csp/myapp/rest/reservations/id |
+| PATH       | http://localhost:52773/csp/myapp/rest/reservations/v3/id |
 
 *Body:*
 
@@ -89,7 +101,7 @@ The body can mention one or all of the propeties. Only the mentioned properties 
 
 | Method    | URL |
 | :---------: | :--- |
-| PUT       | http://localhost:52773/csp/myapp/rest/reservations/id |
+| PUT       | http://localhost:52773/csp/myapp/rest/reservations/v3/id |
 
 *Body:*
 
@@ -108,4 +120,8 @@ All properties of the document will be updated. Properties that are not present 
 
 | Method    | URL |
 | :---------: | :--- |
-| DELETE       | http://localhost:52773/csp/myapp/rest/reservations/id |
+| DELETE       | http://localhost:52773/csp/myapp/rest/reservations/v3/id |
+
+# The Value Of Developing With Containers
+
+This repository also contains some of the examples I used on this presentation. The examples are mostly on the PPT itself, but you may also find the full commands on the files durablerun*.sh.
