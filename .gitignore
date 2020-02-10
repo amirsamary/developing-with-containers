@@ -1,3 +1,9 @@
+# IRIS
+dur/iris.key
+dur/password.key
+dur/password.txt.done
+dur/iris/
+
 # Mac 
 .DS_Store
 
@@ -48,7 +54,3 @@ env.sh
 # Others
 images_built
 *.pid
-
-# VSCode
-.metals
-.vscode
