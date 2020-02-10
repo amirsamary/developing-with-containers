@@ -1,49 +1,26 @@
 Include MyAppMacros
 
-Class TravelAgency.REST.Reservations Extends (TravelAgency.REST.Base, %CSP.REST)
+Class TravelAgency.REST.ReservationsV3 Extends (TravelAgency.REST.Base, %CSP.REST)
 {
 
 XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 {
 <Routes>
-<Route Url="" Method="GET" Call="ImplGetAll" />
-<Route Url="" Method="POST" Call="ImplCreate" />
-<Route Url="/:id" Method="GET" Call="ImplGet" />
-<Route Url="/:id" Method="PUT" Call="ImplFullUpdate" />
-<Route Url="/:id" Method="PATCH" Call="ImplSelectiveUpdate" />
-<Route Url="/:id" Method="DELETE" Call="ImplDelete" />
+	<Route Url="/:id" Method="GET" Call="ImplGet" />
+	<Route Url="" Method="POST" Call="ImplCreate" />
+	<Route Url="" Method="GET" Call="ImplGetAll" />
+	<Route Url="/:id" Method="PUT" Call="ImplFullUpdate" />
+	<Route Url="/:id" Method="PATCH" Call="ImplSelectiveUpdate" />
+	<Route Url="/:id" Method="DELETE" Call="ImplDelete" />
 </Routes>
 }
 
-ClassMethod ImplGetAll() As %Status
-{
-	Try 
-	{
-		Set obj = {"reservations":[]}
-
-		Set rs = ##class(%SQL.Statement).%ExecDirect(,"SELECT ID FROM TravelAgency_Data.Reservation")
-		$$$ThrowSQLExceptionIfResultError(rs, "GetAllSQLReservationsStatementException")
-
-		While rs.%Next()
-		{
-			Do obj.reservations.%Push(..DataModelToJSONObject(rs.%Get("ID")))
-		}
-
-		Write obj.%ToJSON()
-	} 
-	Catch ex 
-	{
-		Do ..ErrorHandling(ex)
-	}
-
-	Quit $$$OK
-}
-
+/// GET
 ClassMethod ImplGet(id As %String)
 {
 	Try 
 	{
-		Set reservation = ##class(TravelAgency.Data.Reservation).%OpenId(id)
+		Set reservation = ..Open(id)
 
 		Set output = ..DataModelToJSONObject(reservation)
 
@@ -67,7 +44,7 @@ ClassMethod DataModelToJSONObject(idOrObjectref) As %DynamicObject
 	}
 	Else
 	{
-		Set reservation = ##class(TravelAgency.Data.Reservation).%OpenId(idOrObjectref)
+		Set reservation = ..Open(idOrObjectref)
 	}
 
 	Set output = {
@@ -82,6 +59,7 @@ ClassMethod DataModelToJSONObject(idOrObjectref) As %DynamicObject
 	Quit output
 }
 
+/// POST
 ClassMethod ImplCreate() As %Status
 {
 	Try 
@@ -98,6 +76,31 @@ ClassMethod ImplCreate() As %Status
 		$$$ThrowStatusExceptionIfError(status, "SaveReservationException")
 
 		Do ..ReportHTTPStatusCreated(reservation.%Id())
+	} 
+	Catch ex 
+	{
+		Do ..ErrorHandling(ex)
+	}
+
+	Quit $$$OK
+}
+
+/// GET
+ClassMethod ImplGetAll() As %Status
+{
+	Try 
+	{
+		Set obj = {"reservations":[]}
+
+		Set rs = ##class(%SQL.Statement).%ExecDirect(,"SELECT ID FROM TravelAgency_Data.Reservation")
+		$$$ThrowSQLExceptionIfResultError(rs, "GetAllSQLReservationsStatementException")
+
+		While rs.%Next()
+		{
+			Do obj.reservations.%Push(..DataModelToJSONObject(rs.%Get("ID")))
+		}
+
+		Write obj.%ToJSON()
 	} 
 	Catch ex 
 	{
@@ -277,6 +280,7 @@ ClassMethod Open(id) As TravelAgency.Data.Reservation
 	Quit reservation
 }
 
+/// DELETE - Treats errors correctly and is idempotent
 ClassMethod ImplDelete(id As %String) As %Status
 {
 	Try 

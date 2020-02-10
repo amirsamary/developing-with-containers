@@ -66,6 +66,7 @@ if [ -f VERSION ]; then
     # will be let alone.
     #
     sed -E -i '' "s;($DOCKER_REPO:.+)-version-[0-9][0-9.]*;\1-version-$INPUT_STRING;g" ./docker-compose.yml
+    sed -E -i '' "s;($DOCKER_REPO:.+)-version-[0-9][0-9.]*;\1-version-$INPUT_STRING;g" ./README.md
     sed -E -i '' "s;($DOCKER_REPO:.+)-version-[0-9][0-9.]*;\1-version-$INPUT_STRING;g" ./ICM/ICMDurable/base_env.sh
 
     # We want the LIVE image to be based on FULL IRIS, not IRIS Community. But we want the same version of IRIS.
@@ -86,7 +87,7 @@ if [ -f VERSION ]; then
     #
     # Add files that were changed by the bumpversion.sh:
     #
-    git add ./CHANGELOG.md ./VERSION ./docker-compose.yml ./image-iris/Dockerfile.live ./ICM/ICMDurable/base_env.sh
+    git add ./CHANGELOG.md ./VERSION ./docker-compose.yml ./image-iris/Dockerfile.live ./ICM/ICMDurable/base_env.sh ./README.md
 
     git commit -m "Bump version to ${INPUT_STRING}."
     git tag -a -m "Tag version ${INPUT_STRING}." "v$INPUT_STRING"

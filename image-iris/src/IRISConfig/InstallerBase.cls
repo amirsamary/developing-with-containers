@@ -165,15 +165,6 @@ ClassMethod CSPAppEnableAnalytics(pCSPAppName) As %Status
 		Set tSC = $System.Status.OK()
 		Try
 		{
-			// This is not required any longer. 
-			// Set oCSPApp = ##class(Security.Applications).%OpenId(pCSPAppName, , .tSC)
-	
-			// Set oCSPApp.DeepSeeEnabled=1
-			// Set oCSPApp.iKnowEnabled=1
-			// Set tSC = oCSPApp.%Save()
-			// Quit:$System.Status.IsError(tSC)
-
-			// This will do all the work for us.
 			Set pCSPAppName=pCSPAppName_"/"
 			Do EnableDeepSee^%SYS.cspServer(pCSPAppName)
 			Do EnableIKnow^%SYS.cspServer(pCSPAppName)
@@ -186,109 +177,11 @@ ClassMethod CSPAppEnableAnalytics(pCSPAppName) As %Status
 		Quit tSC
 }
 
-ClassMethod AddWFRole(pNamespace As %String, pRoleName As %String) As %Status
-{
-		Set tSC = $System.Status.OK()
-		Try
-		{
-			Set tNS = $Namespace
-			Set $Namespace = pNamespace
-			
-			Set tSC = ##class(EnsLib.Workflow.RoleDefinition).CreateRole(pRoleName)
-		}
-		Catch (oException)
-		{
-			Set tSC = oException.AsStatus()
-		}
-		
-		ZN tNS
-		
-		Quit tSC
-}
-
-ClassMethod AddWFUser(pNamespace As %String, pUserName As %String, pFullName As %String, pRoleName As %String) As %Status
-{
-		Set tSC = $System.Status.OK()
-		Try
-		{
-			Set tNS = $Namespace
-			Set $Namespace = pNamespace
-			
-			Set tSC = ##class(EnsLib.Workflow.UserDefinition).CreateUser(pUserName,pFullName)
-			Quit:$System.Status.IsError(tSC)
-			
-			Set tSC = ##class(EnsLib.Workflow.RoleDefinition).AddUserToRole(pRoleName,pUserName,1,"")
-		}
-		Catch (oException)
-		{
-			Set tSC = oException.AsStatus()
-		}
-		
-		ZN tNS
-		
-		Quit tSC
-}
-
-ClassMethod AddUserToWFRole(pNamespace As %String, pUserName As %String, pRoleName As %String) As %Status
-{
-		Set tSC = $System.Status.OK()
-		Try
-		{
-			Set tNS = $Namespace
-			Set $Namespace = pNamespace
-			
-			Set tSC = ##class(EnsLib.Workflow.RoleDefinition).AddUserToRole(pRoleName,pUserName,0,"")
-		}
-		Catch (oException)
-		{
-			Set tSC = oException.AsStatus()
-		}
-		
-		ZN tNS
-		
-		Quit tSC
-}
-
-ClassMethod FixPMML() As %Status
-{
-		Set tSC = $System.Status.OK()
-		Try
-		{
-			Set tNS=$Namespace
-			ZN "%SYS"
-			
-			Set oDBSYS = ##class(SYS.Database).%OpenId("/usr/irissys/mgr/irislib")
-			Set oDBSYS.ReadOnly=0
-
-			Set tSC = oDBSYS.%Save()
-			Quit:$System.Status.IsError(tSC)
-						
-			Set tSC = $System.OBJ.Load("/tmp/PMML.xml", "cku")
-			Quit:$System.Status.IsError(tSC)
-
-		}
-		Catch (oException)
-		{
-			Set tSC = oException.AsStatus()
-		}
-		
-		If $IsObject(oDBSYS)
-		{
-			Set oDBSYS.ReadOnly=1
-	
-			Do oDBSYS.%Save()
-		}
-		
-		ZN tNS
-		
-		Quit tSC
-}
-
 XData Install [ XMLNamespace = INSTALLER ]
 {
 <Manifest>
 
-	</Manifest>
+</Manifest>
 }
 
 }

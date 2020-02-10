@@ -55,7 +55,7 @@ ClassMethod ErrorHandling(ex)
 	} 
 	Else 
 	{
-		Set %response.Status = "500 Internal Server Error"
+		Set %response.Status = ##class(%CSP.REST).#HTTP500INTERNALSERVERERROR
 		Do ex.Log() // Write to application error log (^ERRORS)
 		Set obj = {"error": ($System.Status.GetOneErrorText(ex.AsStatus()))}
 		Write obj.%ToJSON()
