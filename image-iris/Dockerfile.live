@@ -4,10 +4,6 @@ LABEL maintainer="Amir Samary <amir.samary@intersystems.com>"
 # If you want to have an IRIS Interoperability Production configured to be started automatically
 ENV IRIS_PRODUCTION_AUTOSTART=""
 
-# Name of the application. This will be used to define the namespace, database and 
-# name of the CSP application for REST and SOAP for this application.
-ENV IRIS_APP_NAME="MYAPP"
-
 # Adding source code that will be loaded by the installer
 ADD --chown=irisowner:irisuser ./src/ /tmp/iris_project
 

@@ -17,7 +17,7 @@ Follow the instructions bellow to start the IRIS container with the source code.
 To run this demo, you need Docker installed on your PC. Then you can just run:
 
 ```bash
-docker run -it --name iris --init --rm -p 52773:52773 amirsamary/developing-with-containers:irisdb-version-1.7.0
+docker run -it --name iris --init --rm -p 52773:52773 amirsamary/developing-with-containers:irisdb-version-1.8.0
 ```
 
 ## How to build this demo on my PC?
@@ -27,7 +27,7 @@ Ideally, you should run the ./build.sh script which will build the image locally
 But you can also build it directly with the docker build command and tag it with a name of your preference:
 
 ```bash
-docker build -t amirsamary/developing-with-containers:irisdb-version-1.7.0 ./image-iris
+docker build -t amirsamary/developing-with-containers:irisdb-version-1.8.0 ./image-iris
 ```
 
 ## How to look at the source code and change it?
