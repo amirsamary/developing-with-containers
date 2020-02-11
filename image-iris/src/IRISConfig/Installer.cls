@@ -17,20 +17,17 @@ XData Install [ XMLNamespace = INSTALLER ]
 		<Arg name="pRole" Value="%DB_APPINT"/>
 	</Invoke>
 	
-	<Log Text="Configuring namespace ${Namespace}..." Level="0"/>
-	<Namespace Name="${Namespace}" Create="yes" Code="${Namespace}" Ensemble="1" Data="${Namespace}">
-		<Configuration>
-				<Database Name="${Namespace}" Dir="${MGRDIR}${Namespace}" Create="yes" MountRequired="1" Resource="%DB_APPINT"/>
-		</Configuration>
-	</Namespace>
-	
+	<Log Text="Configuring namespace ${Namespace}..." Level="0"/>	
 	<Log Text="Creating CSP Applications for ${Namespace}..." Level="0"/>
 	<Namespace Name="${Namespace}" Create="no">
 		<!--
 		We want to have the Ensemble CSP application completely apart from the REST and SOAP CSP applications.
 		-->
-		<CSPApplication Url="/csp/${CSPAppName}" Directory="${CSPDIR}${CSPAppName}"     Recurse="true" AuthenticationMethods="#{##class(IRISConfig.Installer).AuthForSMP()}" IsNamespaceDefault="true"   CookiePath="/csp/${CSPAppName}" AutoCompile="false" Grant="AppRole" CSPZENEnabled="true" InboundWebServicesEnabled="false" GroupById="%ISCMgtPortal" Resource="%Ens_Portal"/>
-		
+		<!-- CSPApplication Url="/csp/${CSPAppName}" Directory="${CSPDIR}${CSPAppName}"     Recurse="true" AuthenticationMethods="#{##class(IRISConfig.Installer).AuthForSMP()}" IsNamespaceDefault="true"   CookiePath="/csp/${CSPAppName}" AutoCompile="false" Grant="AppRole" CSPZENEnabled="true" InboundWebServicesEnabled="false" GroupById="%ISCMgtPortal" Resource="%Ens_Portal"/-->
+		<Configuration>
+				<Database Name="${Namespace}" Dir="${MGRDIR}${Namespace}" Create="yes" MountRequired="1" Resource="%DB_APPINT"/>
+		</Configuration>
+
 		<CSPApplication Url="/csp/${CSPAppName}/soap" Directory="${CSPDIR}${CSPAppName}" Recurse="true" AuthenticationMethods="#{##class(IRISConfig.Installer).AuthForSOAP()}" IsNamespaceDefault="false" CookiePath="/csp/${CSPAppName}/soap" AutoCompile="false" Grant="AppRole" CSPZENEnabled="true" InboundWebServicesEnabled="true"  GroupById="${CSPAppName}" UseSessionCookie="1"/>
 		
 		<CSPApplication Url="/csp/${CSPAppName}/rest" Directory="${CSPDIR}${CSPAppName}" Recurse="true" AuthenticationMethods="#{##class(IRISConfig.Installer).AuthForREST()}" IsNamespaceDefault="false" CookiePath="/csp/${CSPAppName}/rest" AutoCompile="false" Grant="AppRole" CSPZENEnabled="true" InboundWebServicesEnabled="false" GroupById="${CSPAppName}" DispatchClass="TravelAgency.REST.Dispatcher" UseSessionCookie="1"/>
@@ -48,16 +45,16 @@ XData Install [ XMLNamespace = INSTALLER ]
 		<Arg name="pDispatcherClassName" Value="TravelAgency.REST.Dispatcher"/>
 	</Invoke>
 
-	<Log Text="Enabling Analytics on main CSP application so we can import PMML and see production statistics." Level="0"/>
+	<!-- Log Text="Enabling Analytics on main CSP application so we can import PMML and see production statistics." Level="0"/>
 	<Invoke Class="IRISConfig.Installer" Method="CSPAppEnableAnalytics" CheckStatus="true">
 		<Arg name="pCSPAppName" Value="/csp/${CSPAppName}"/>
-	</Invoke>
+	</Invoke-->
 
-	<Log Text="Configuring production auto-start." Level="0"/>
+	<!-- Log Text="Configuring production auto-start." Level="0"/>
 	<Invoke Class="IRISConfig.Installer" Method="ConfigureAutoStart" CheckStatus="true">
 		<Arg name="pNamespace" Value="${Namespace}"/>
 		<Arg name="pNamespace" Value="${ConfigureAutoStartProduction}"/>
-	</Invoke>
+	</Invoke-->
 	
 </Manifest>
 }

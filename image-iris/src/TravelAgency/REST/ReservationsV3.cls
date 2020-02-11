@@ -140,7 +140,7 @@ ClassMethod Validate(reservation As %Library.DynamicObject)
 	Catch 
 	{
 		$$$ThrowBadRequestException("Invalid format for start date")
-	}
+	} 
 	
 	Try {
 		Set endDate = $zdateh(reservation.endDate,3)

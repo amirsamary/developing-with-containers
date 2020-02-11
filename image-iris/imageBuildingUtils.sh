@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Let's keep it simple and do everything on the USER database
+export IRIS_APP_NAME=USER
+
 precondition_checks() {
 	if [ $UID -eq 0 ]; then
 		error "You should run this script as $ISC_PACKAGE_MGRUSER."

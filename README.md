@@ -124,4 +124,10 @@ All properties of the document will be updated. Properties that are not present 
 
 # The Value Of Developing With Containers
 
-This repository also contains some of the examples I used on this presentation. The examples are mostly on the PPT itself, but you may also find the full commands on the files durablerun*.sh.
+This repository also contains some of the examples I used on this presentation:
+* durablerun.sh - Starts IRIS Community with Durable %SYS
+* durablerun2.sh - Starts IRIS Community with Durable %SYS and merge CPF file for configuring global buffers and routine buffers
+* durablerun3.sh - Starts IRIS Community with Durable %SYS, merge CPF and a predefined system password
+* durablerun4.sh - Starts IRIS with Durable %SYS, merge CPF, a predefined system password and a license key
+* durablerun5.sh - Starts IRIS Community with our REST application on a Durable %SYS, configured with a merge CPF and a predefined system password!
+
