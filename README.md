@@ -3,10 +3,15 @@
 This repository holds the source code used on two of my presentations:
 - [REST API design - REST at Ease](https://raw.githubusercontent.com/amirsamary/developing-with-containers/master/presentations/REST_API_design_with_IRIS.pdf)
 - [The Value Of Developing With Containers](https://raw.githubusercontent.com/amirsamary/developing-with-containers/master/presentations/Value_Of_Containers_with_IRIS.pdf)
+- [Machine Learning - An InterSystems Perspective and Demonstration](https://raw.githubusercontent.com/amirsamary/developing-with-containers/master/presentations/Machine_Learning_An_InterSystems_Perspective_and_Demonstration.pdf)
 
 The first presentation was inspired on a presentation of a similar name, given by Michael Smart. Although this repository containes everything you need, Michael's original source code can be found [here](https://github.com/intersystems/rest-and-relaxation). Thank you Michael!
 
 The second presentation was inspired on a presentation of the same name, given by Joe Carrol. Thank you Joe! I have updated just a little bit and added some new stuff.
+
+The third presentation ends with two demos:
+- [The Readmission Demo](https://github.com/intersystems-community/irisdemo-demo-readmission) - That uses Spark to build a model and PMML to operationalize it
+- Integrated ML Demo - That is going to be released on IRIS 2020.2
 
 # REST API design - REST at Ease
 

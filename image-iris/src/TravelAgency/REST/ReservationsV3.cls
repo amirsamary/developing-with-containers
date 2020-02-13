@@ -67,8 +67,6 @@ ClassMethod ImplCreate() As %Status
 		Set input = ..GetJSONData()
 
 		Do ..Validate(input)
-
-		Set reservation = ##class(TravelAgency.Data.Reservation).%New()
 		
 		Do ..JSONObjectToDataModel(input, .reservation)
 		

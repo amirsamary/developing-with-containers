@@ -30,7 +30,7 @@ ClassMethod Destinations() As %Status
 {
     Do ..CacheResponse()
 
-    Set obj = {"destinations": ["London","Madrid","Tokyo"]} 
+    Set obj = {"destinations": ["London","Madrid","Tokyo123"]} 
     Write obj.%ToJSON()
     
     Quit $$$OK
