@@ -53,11 +53,6 @@ ClassMethod ImplCreate() As %Status
 	}
 
 	Set reservation = ##class(TravelAgency.Data.Reservation).%New()
-	If reservation = ""
-	{
-		Set %response.Status=##class(%CSP.REST).#HTTP404NOTFOUND
-		Quit $$$OK
-	}
 
 	Set reservation.Customer = $zstrip(input.customer,"<>W")
 	Set reservation.StartLocation = $zstrip(input.startLocation,"<>W")

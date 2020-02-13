@@ -1,6 +1,9 @@
 #!/bin/bash
 
+rm -f ./dur/password.txt
+rm -f ./dur/password.txt.done
 echo sys123 >> ./dur/password.txt
+
 docker run \
      --volume $PWD/dur:/dur \
      --env ISC_DATA_DIRECTORY=/dur/iris \
